@@ -77,12 +77,4 @@ if __name__ == "__main__":
     source, sink = 0, 5
 
     print(g.edmonds_karp(source, sink))
-#
-# [
-# [[c, f]]
-#   ]
-#
-#
-#
-#
-#
+
