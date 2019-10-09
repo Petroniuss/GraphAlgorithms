@@ -12,4 +12,6 @@ Implementations of various graph algorithms showed on lectures.
 1. [dijsktra.py](./Elementary/dijsktra.py)
 2. [union_find.py](./Elementary/union_find.py)
 
+![graph_photo](https://user-images.githubusercontent.com/31375809/66499829-d9310680-eac0-11e9-8c0b-ec286dc76682.png)
+
 
