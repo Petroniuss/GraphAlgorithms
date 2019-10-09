@@ -1,4 +1,4 @@
-# Laboratory 1 ***"warm-up"***
+# Laboratory 1: ***"warm-up"***
 
 ## Travel Guide
 
@@ -18,4 +18,7 @@ is as big as possible.
 1. [find_union_solution](./find_union_solve.py)
 2. [bin_search_bfs](./bin_search_solve.py)
 3. [modified_dijkstra.py](./modified_dijkstra_solve.py)
+
+
+
 
