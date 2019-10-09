@@ -5,7 +5,7 @@ Implementations of various graph algorithms showed on lectures.
 1. [edmonds_karp.py](./Lecture/edmonds_karp.y)
 
 ## Laboratory
-1. __[warm-up](./Laboratory/Lab_1)__
+1. [warm-up](./Laboratory/Lab_1)
     
 
 ## Elementary Algorithms covered on ASD
