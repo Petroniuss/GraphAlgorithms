@@ -5,6 +5,19 @@ class Subset:
         self.parent = parent
         self.rank = 0
 
+class Graph:
+    # Edge: (from, to, weight)
+    def __init__(self, V, edges):
+        self.V = V
+        self.edges = edges 
+
+    def print_edges(self):
+        for (u, v, w) in self.edges:
+            print("Edge[From: ", u, ", to: ", v, ", weight: ", w, "]", sep="")  
+
+    def sort_edges(self):
+        self.edges.sort(key = lambda edge: edge[2])
+
 
 def find(subsets, u):
     if u != subsets[u].parent:
@@ -22,11 +35,27 @@ def union(subsets, u, v):
         subsets[v_repr].parent = u_repr
     else:
         subsets[u_repr].parent = v_repr
-
+        subsets[v_repr].rank = subsets[v_repr].rank + 1
 
 
 ### Main ###
-(V, L) = loadWeightedGraph(r"Graphs\Laboratory\Lab_1\Tests\g1")
+# We assume that s = 1, t = 2.
 
-for (u, v, w) in L:
-    print("Edge[From: ", u, ", to: ", v, ", weight: ", w, "]", sep="")
+(V, E) = loadWeightedGraph(r"Laboratory\Lab_1\Tests\g1")
+subsets = [Subset(u) for u in range(V + 1)]
+s, t = 1, 2
+
+graph = Graph(V, E)
+graph.sort_edges()
+
+for (u, v, w) in graph.edges:
+    union(subsets, u, v)
+
+    s_repr = find(subsets, s)
+    t_repr = find(subsets, t)
+
+    if s_repr == t_repr:
+        print("Solution is: ", w)
+        break
+    
+

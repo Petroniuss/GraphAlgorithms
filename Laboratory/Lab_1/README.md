@@ -15,8 +15,8 @@ is as big as possible.
 - flow via found path.
 
 ### Solutions
-1. [find_union_solution](./find_union_solve.py)
-2. [bin_search_bfs](./bin_search_solve.py)
+1. [find_union_solution.py](./find_union_solve.py)
+2. [bin_search_bfs.py](./bin_search_solve.py)
 3. [modified_dijkstra.py](./modified_dijkstra_solve.py)
 
 
