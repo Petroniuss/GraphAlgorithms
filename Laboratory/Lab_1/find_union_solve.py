@@ -16,7 +16,7 @@ class Graph:
             print("Edge[From: ", u, ", to: ", v, ", weight: ", w, "]", sep="")  
 
     def sort_edges(self):
-        self.edges.sort(key = lambda edge: edge[2])
+        self.edges.sort(key = lambda edge: edge[2], reverse=True)
 
 
 def find(subsets, u):
