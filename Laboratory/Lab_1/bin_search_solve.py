@@ -51,4 +51,4 @@ E.sort(key=lambda edge: edge[2])
 
 solution = bin_search_solution(E, V, 1, 2)
 
-print(solution)
+print("Solution is", solution)

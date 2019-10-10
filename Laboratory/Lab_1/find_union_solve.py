@@ -55,7 +55,7 @@ for (u, v, w) in graph.edges:
     t_repr = find(subsets, t)
 
     if s_repr == t_repr:
-        print("Solution is: ", w)
+        print("Solution is", w)
         break
     
 
