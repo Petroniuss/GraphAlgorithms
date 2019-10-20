@@ -19,10 +19,8 @@ is as big as possible.
 2. [bin_search_bfs.py](./bin_search_solve.py)
 3. [modified_dijkstra.py](./modified_dijkstra_solve.py)
 
-- Testing script: [tester](./tester.py)
-
-
 ### Links
+- Testing script [tester.py](./tester.py)
 - [Laboratory instructions](https://faliszew.github.io/algograf/lab1?fbclid=IwAR0OIyNGPuGreroPvtLclXphL-q7K638kWQ1t4hZ1BuvabPPwBdhunwYuhE)
 
 
