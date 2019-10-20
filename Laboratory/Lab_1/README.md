@@ -20,7 +20,7 @@ is as big as possible.
 3. [modified_dijkstra.py](./modified_dijkstra_solve.py)
 
 ### Links
-- Testing script [tester.py](./tester.py)
+- [Testing script - tester.py](./tester.py)
 - [Laboratory instructions](https://faliszew.github.io/algograf/lab1?fbclid=IwAR0OIyNGPuGreroPvtLclXphL-q7K638kWQ1t4hZ1BuvabPPwBdhunwYuhE)
 
 
