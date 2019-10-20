@@ -1,4 +1,4 @@
-from dimacs import *
+from dimacs import loadWeightedGraph
 
 class Subset:
     def __init__(self, parent):
