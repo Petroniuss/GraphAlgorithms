@@ -19,7 +19,7 @@ is as big as possible.
 2. [bin_search_bfs.py](./bin_search_solve.py)
 3. [modified_dijkstra.py](./modified_dijkstra_solve.py)
 
-- Testing script: [tester] (./tester.py)
+- Testing script: [tester](./tester.py)
 
 
 ### Links
