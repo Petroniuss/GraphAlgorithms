@@ -37,25 +37,24 @@ def union(subsets, u, v):
         subsets[u_repr].parent = v_repr
         subsets[v_repr].rank = subsets[v_repr].rank + 1
 
-
 ### Main ###
 # We assume that s = 1, t = 2.
+def solve(test):
+    (V, E) = loadWeightedGraph(r"Laboratory\Lab_1\Tests" + "\\" + test)
+    subsets = [Subset(u) for u in range(V + 1)]
+    s, t = 1, 2
 
-(V, E) = loadWeightedGraph(r"Laboratory\Lab_1\Tests\g1")
-subsets = [Subset(u) for u in range(V + 1)]
-s, t = 1, 2
+    graph = Graph(V, E)
+    graph.sort_edges()
 
-graph = Graph(V, E)
-graph.sort_edges()
+    for (u, v, w) in graph.edges:
+        union(subsets, u, v)
 
-for (u, v, w) in graph.edges:
-    union(subsets, u, v)
+        s_repr = find(subsets, s)
+        t_repr = find(subsets, t)
 
-    s_repr = find(subsets, s)
-    t_repr = find(subsets, t)
+        if s_repr == t_repr:
+            return w
 
-    if s_repr == t_repr:
-        print("Solution is", w)
-        break
-    
+    return -1
 

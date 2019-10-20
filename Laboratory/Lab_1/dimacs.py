@@ -30,6 +30,25 @@ def loadWeightedGraph( name ):
   f.close()
   return (V,L)
 
+# Patryk Wojtyczek
+def load_solution(test):
+    """Expects: 
+       string - filename
+       Returns:
+       int - solution to test"""
+    file_path = "Laboratory\\Lab_1\\Tests\\" + test
+    solution = -1
+
+    file = open(file_path, "r")
+
+    words = file.readline().split()
+    if words[0] == "c":
+        solution = int(words[-1])
+
+    file.close()
+
+    return solution
+
 
 
 

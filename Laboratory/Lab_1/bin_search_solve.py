@@ -1,10 +1,11 @@
 from collections import deque
-from dimacs import *
+from dimacs import loadWeightedGraph
+import sys
 
 class Graph:
     def __init__(self, E, V):
         self.V = V
-        self.G = [deque() for _ in range(0, V + 1)] 
+        self.G = [deque() for _ in range(V + 1)] 
         
         for (u, v, w) in E:
             self.G[u].appendleft((v, w))
@@ -44,11 +45,10 @@ def bin_search_solution(E, V, s, t):
 
     return flow
 
+def solve(test):
+    (V, E) = loadWeightedGraph(r"Laboratory\Lab_1\Tests" + "\\" + test)
+    E.sort(key=lambda edge: edge[2])
+    sys.setrecursionlimit(5000)
+    solution = bin_search_solution(E, V, 1, 2)
 
-#--------------------Solution--------------------------#
-(V, E) = loadWeightedGraph(r"Laboratory\Lab_1\Tests\g1")
-E.sort(key=lambda edge: edge[2])
-
-solution = bin_search_solution(E, V, 1, 2)
-
-print("Solution is", solution)
+    return solution
