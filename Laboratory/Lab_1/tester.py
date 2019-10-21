@@ -17,7 +17,7 @@ for test in tests:
     if bin_search_solve(test) == solution:
       bin_search_success = bin_search_success + 1
     if find_union_solve(test) == solution:
-        find_union_success = find_union_success + 1
+      find_union_success = find_union_success + 1
     
     print("Tested: ", test, success_mark)
 
