@@ -6,6 +6,7 @@ Implementations of various graph algorithms showed on lectures.
 
 ## Laboratory
 1. [warm-up](./Laboratory/Lab_1)
+2. [so-it-begins..](./Laboratory/Lab_2)
     
 
 ## Elementary Algorithms covered on ASD
