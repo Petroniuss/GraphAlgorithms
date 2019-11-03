@@ -3,7 +3,7 @@ from dimacs import load_solution
 import os
 
 """
-    To run  test in top directory run: py Laboratory/Lab_2/tester.py
+    To run exectute in top directory run: py Laboratory/Lab_2/tester.py
 """
 
 ex_1_tests_directory = "Laboratory\\Lab_2\\tests\\flow"
