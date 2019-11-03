@@ -43,7 +43,6 @@ class Graph:
             if edge[0] == v:
                 return edge
 
-## returns boolean
 def find_path(graph, parent, s , t):
     visited = [False] * (graph.V + 1)
     visited[s] = True
