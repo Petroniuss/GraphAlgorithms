@@ -7,7 +7,7 @@ Implementations of various graph algorithms showed on lectures.
 ## Laboratory
 1. [warm-up](./Laboratory/Lab_1)
 2. [ford-fulkerson..](./Laboratory/Lab_2)
-3. [edge-connectivity](.Laboratory/Lab_3)
+3. [edge-connectivity](./Laboratory/Lab_3)
     
 
 ## Elementary Algorithms covered on ASD
