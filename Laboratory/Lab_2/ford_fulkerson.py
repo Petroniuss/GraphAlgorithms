@@ -105,28 +105,3 @@ def ford_fulkerson(test):
         maxium_flow = maxium_flow + f
 
     return maxium_flow
-
-
-        
-
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
