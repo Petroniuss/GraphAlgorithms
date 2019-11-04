@@ -3,7 +3,6 @@
 # Load graph in the DIMACS ascii format + weights
 
 
-
 def loadWeightedGraph( name ):
   """Load a graph in the DIMACS ascii format (with weights) from 
      the file "name" and return it as a list of sets
@@ -59,3 +58,20 @@ def loadDirectedWeightedGraph( name ):
   f.close()
   return (V,L)
 
+# Patryk Wojtyczek
+def load_solution(file_path):
+    """Expects: 
+       string - filename
+       Returns:
+       int - solution to test"""
+    solution = -1
+
+    file = open(file_path, "r")
+
+    words = file.readline().split()
+    if words[0] == "c":
+        solution = int(words[-1])
+
+    file.close()
+
+    return solution

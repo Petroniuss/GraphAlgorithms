@@ -2,7 +2,7 @@ from collections import deque
 from dimacs import loadDirectedWeightedGraph
 
 """
-    Edmonds-Karp implementation of Ford-Fulkerson algorithm.
+    Edmonds-Karp implementation of Ford-Fulkerson algorithm - code from 2nd laboratories.
 """
 class Graph:
 
@@ -65,12 +65,14 @@ def find_path(graph, parent, s , t):
     return visited[t]
 
 
-def ford_fulkerson(test, start, end):
+def ford_fulkerson(test, s = 1, t = -1):
     (V, L) = loadDirectedWeightedGraph(test)
     
     graph = Graph(L, V)
     parent = [-1 for _ in range (V + 1)]
-    s, t = start, end
+
+    if t == -1:
+        t = V
 
     while find_path(graph, parent, 1, V):
         v = t
