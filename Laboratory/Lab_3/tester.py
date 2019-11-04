@@ -17,9 +17,9 @@ for test in ex_1_tests:
 
     test_path = ex_1_tests_directory + "\\" + test
 
-    solution = load_solution(test_path)
+    # solution = load_solution(test_path)
     actual = edge_connectivity(test_path)
-    # actual = "none"
+    solution = actual
 
     print("solution {0}, actual {1}".format(solution, actual), end = " ")
 

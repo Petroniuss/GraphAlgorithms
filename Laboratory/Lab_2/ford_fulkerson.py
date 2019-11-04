@@ -65,12 +65,12 @@ def find_path(graph, parent, s , t):
     return visited[t]
 
 
-def ford_fulkerson(test, start, end):
+def ford_fulkerson(test):
     (V, L) = loadDirectedWeightedGraph(test)
     
     graph = Graph(L, V)
     parent = [-1 for _ in range (V + 1)]
-    s, t = start, end
+    s, t = 1, V
 
     while find_path(graph, parent, 1, V):
         v = t

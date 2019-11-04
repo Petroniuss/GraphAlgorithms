@@ -11,8 +11,6 @@ def edge_connectivity(test):
         while t <= V:
             v = ford_fulkerson(test, s, t)
             
-            print("s:", s, "t:", t, "max-flow:", v)
-
             if v < minimum:
                 minimum = v
 

@@ -55,8 +55,10 @@ def find_path(graph, parent, s , t):
 
     while Q:
         u = Q.popleft()
+
         for (v, flow, capacity) in graph.G[u]:
             cf = capacity - flow
+        
             if (not visited[v]) and cf > 0:
                 parent[v] = u
                 visited[v] = True
@@ -74,7 +76,7 @@ def ford_fulkerson(test, s = 1, t = -1):
     if t == -1:
         t = V
 
-    while find_path(graph, parent, 1, V):
+    while find_path(graph, parent, s, t):
         v = t
         min_cf = float("inf")
 
@@ -89,7 +91,7 @@ def ford_fulkerson(test, s = 1, t = -1):
             v = u
 
         v = t
-        
+
         while v != s:
             u = parent[v]
 
