@@ -6,7 +6,7 @@ import os
     To exectute in top directory run: py Laboratory/Lab_3/tester.py
 """
 
-ex_1_tests_directory = "Laboratory\\Lab_3\\tests"
+ex_1_tests_directory = "Laboratory\\Lab_3\\tests\\connectivity"
 ex_1_tests = [os.fsdecode(file) for file in os.listdir(ex_1_tests_directory)]
 ex_1_success = 0
 
@@ -17,9 +17,8 @@ for test in ex_1_tests:
 
     test_path = ex_1_tests_directory + "\\" + test
 
-    # solution = load_solution(test_path)
     actual = edge_connectivity(test_path)
-    solution = actual
+    solution = load_solution(test_path)
 
     print("solution {0}, actual {1}".format(solution, actual), end = " ")
 

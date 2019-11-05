@@ -1,11 +1,11 @@
 from collections import deque
-from dimacs import loadDirectedWeightedGraph
+from dimacs import *
 
 """
     Edmonds-Karp implementation of Ford-Fulkerson algorithm - code from 2nd laboratories.
 """
 class Graph:
-
+    ###
     ### Edge is represented by tuple: (to, flow, capacity) ###
     def __init__(self, E, V):
         self.V = V
@@ -15,7 +15,7 @@ class Graph:
             self.G[u].append((v, 0, capacity))
 
             if not self.contains_edge(v, u):
-                self.G[v].append((u, 0, 0))
+                self.G[v].append((u, 0, capacity))
 
 
     def contains_edge(self, u, v):
@@ -46,7 +46,7 @@ class Graph:
             if edge[0] == v:
                 return edge
 
-def find_path(graph, parent, s , t):
+def find_path(graph, parent, s, t):
     visited = [False] * (graph.V + 1)
     visited[s] = True
     
@@ -67,14 +67,11 @@ def find_path(graph, parent, s , t):
     return visited[t]
 
 
-def ford_fulkerson(test, s = 1, t = -1):
+def ford_fulkerson(test, s, t):
     (V, L) = loadDirectedWeightedGraph(test)
     
     graph = Graph(L, V)
     parent = [-1 for _ in range (V + 1)]
-
-    if t == -1:
-        t = V
 
     while find_path(graph, parent, s, t):
         v = t
