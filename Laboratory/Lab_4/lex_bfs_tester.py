@@ -3,7 +3,7 @@ from dimacs import checkLexBFS
 import os
 
 """
-    To exectute in top directory run: py Laboratory/Lab_4/tester_1.py
+    To exectute in top directory run: py Laboratory/Lab_4/lex_bfs_tester.py
 """
 
 ex_1_tests_directory = "Laboratory\\Lab_4\\tests\\maxclique"
@@ -30,3 +30,4 @@ for test in ex_1_tests:
 print("-" * 50)
 print("Finished testing lex-bfs {0}/{1} ".format(ex_1_success, len(ex_1_tests)) + u"\u2713")
 print("-" * 50)
+

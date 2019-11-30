@@ -1,25 +1,31 @@
 from dimacs import loadWeightedGraph
 
 class Node:
-  def __init__(self, idx):
-    self.idx = idx
-    self.out = set()                    # set of neighbours
+    def __init__(self, idx):
+        self.idx = idx
+        self.out = set()                    # set of neighbours
 
-  def connect_to(self, v):              # add edge between node (u) and node (v)
-    self.out.add(v)
+    def connect_to(self, v):              # add edge between node (u) and node (v)
+        self.out.add(v)
+
+    def __str__(self):
+        return f"u: {self.idx}"
+
+    def __repr__(self):
+        return str(self)
 
 def lex_bfs(G, start = 1):
     V = len(G)
 
-    full_set = set([G[i] for i in range(1, V) if i != start])
-    start_set = set({G[start]})
+    full_set = set([i for i in range(1, V) if i != start])
+    start_set = set({start})
 
     sets = [full_set, start_set]
     result = []
 
     while len(sets) > 0: 
         u = sets[-1].pop()
-        result.append(u.idx)
+        result.append(u)
 
         new_sets = []
         for X in sets:
@@ -27,10 +33,11 @@ def lex_bfs(G, start = 1):
             K = set() 
             
             for v in X:
-                if v in u.out:
+                if v in G[u].out:
                     Y.add(v)
                 else:
                     K.add(v)
+
             if K:
                 new_sets.append(K)
             if Y:
