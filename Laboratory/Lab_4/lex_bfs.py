@@ -1,4 +1,4 @@
-from dimacs import loadDirectedWeightedGraph
+from dimacs import loadWeightedGraph
 
 class Node:
   def __init__(self, idx):
@@ -24,26 +24,24 @@ def lex_bfs(G, start = 1):
         new_sets = []
         for X in sets:
             Y = set()
-            K = set()
+            K = set() 
             
             for v in X:
                 if v in u.out:
                     Y.add(v)
                 else:
                     K.add(v)
-
-            new_sets.append(K)
-            new_sets.append(Y)    
+            if K:
+                new_sets.append(K)
+            if Y:
+                new_sets.append(Y)    
         
-        while len(new_sets) > 0 and not new_sets[-1]:
-            new_sets.pop()
-
         sets = new_sets
 
     return result
 
 def run(name):
-    (V, L) = loadDirectedWeightedGraph(name)
+    (V, L) = loadWeightedGraph(name)
 
     G = [None] + [Node(i) for i in range(1, V + 1)]  # żeby móc indeksować numerem wierzchołka
 

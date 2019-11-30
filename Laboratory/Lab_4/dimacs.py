@@ -83,4 +83,3 @@ def checkLexBFS(G, vs):
         if not viable or min(verts) <= min(viable):
           return False
   return True
-
