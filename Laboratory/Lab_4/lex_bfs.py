@@ -48,7 +48,7 @@ def lex_bfs(G, start):
 def run(name):
     (V, L) = loadDirectedWeightedGraph(name)
 
-    G = [None] + [Node(i) for i in range(1, V+1)]  # żeby móc indeksować numerem wierzchołka
+    G = [None] + [Node(i) for i in range(1, V + 1)]  # żeby móc indeksować numerem wierzchołka
 
     for (u, v, _) in L:
         G[u].connect_to(v)
