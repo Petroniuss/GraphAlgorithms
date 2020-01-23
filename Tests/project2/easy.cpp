@@ -18,10 +18,21 @@ struct BiGraph {
     int* dist;
 } typedef BiGraph;
 
-struct tuple {
-    int min;
-    int max;
-} typedef tuple;
+struct Edge {
+    int to;
+    int u;
+    int l;
+} typedef Edge;
+
+Edge* edge(int to, int l, int u) {
+    Edge* edge = new Edge;
+    
+    edge -> to = to;
+    edge -> u = u;
+    edge -> l = l;
+
+    return edge;
+}
 
 void addEdge(BiGraph* G, int u, int v) {
     G -> adj[u].push_back(v);
@@ -134,6 +145,17 @@ int hopccroftKarp(BiGraph* G) {
     return maxiumMatching;
 }
 
+int checkMin(int currentMin, int l) {
+    if (currentMin < l) return l;
+    else                return currentMin;
+        
+}
+
+int checkMax(int currentMax, int u) {
+    if (currentMax < u) return currentMax;
+    else                return u;
+}
+
 // ---- Notes ---- 
 /*
     - Vertices now are numerated from 1 not 0 as it was previosuly!
@@ -150,18 +172,66 @@ void solveTest() {
 
     int* L = new int[n + 1];
     int* U = new int[n + 1];
+    
     BiGraph* G = specialBiGraph(n);
+    vector<Edge*>* edges = new vector<Edge*>[n + 1];
 
     while (dummy-- > 0) {
         int from, to, l, u;
+        Edge* e;
+
         cin >> from >> to >> l >> u;
-    
+        e = edge(to, l, u);
+
         addEdge(G, from, to);
+        edges[from].push_back(e);
     }
 
-    printBiGraph(G);
-}
+    int maxiumMatching = hopccroftKarp(G);
 
+    cout << endl << "Maximum Matching = " << maxiumMatching << endl << "Edges: ";
+    for(int u = 1; u <= G -> M; u++) {
+        if (G -> pairU[u] != NIL) {
+            cout << endl << u << "<->" << G -> pairU[u];
+        }
+    }
+
+    int x = INF;
+    int min = INT_MIN;
+    int max = INT_MAX;
+
+    for(int u = 1; u <= G -> M; u++) {
+        if (G -> pairU[u] != NIL) {
+            cout << endl << u << "<->" << G -> pairU[u];
+
+            for (auto e: edges[u]) {
+                if (e -> to == G -> pairU[u]) {
+                    min = checkMin(min, e -> l);
+                    max = checkMax(max, e -> u);
+                    cout << " :" << e -> l << ", " << e -> u;
+                    break;
+                }
+            }
+        }
+    }
+
+    cout << endl << "Min: " << min << ", max: " << max << endl;
+
+    if (min > max) {
+        cout << -1 << endl;
+        return;
+    }
+
+    cout << min << endl;
+
+    for(int u = 1; u <= G -> M; u++) {
+        if (G -> pairU[u] != NIL) {
+            cout << endl << u << "<->" << G -> pairU[u];
+        }
+    }
+
+    cout << endl;
+}
 
 int main(int argc, char const *argv[]) {
     int tests;
