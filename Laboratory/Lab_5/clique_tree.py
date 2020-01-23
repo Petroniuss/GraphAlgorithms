@@ -58,4 +58,3 @@ def run_clique_tree(test):
     rn = calc_rn(G, order)
     root = build_tree(G, order, rn)
 
-
