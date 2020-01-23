@@ -160,6 +160,8 @@ int checkMax(int currentMax, int u) {
 /*
     - Vertices now are numerated from 1 not 0 as it was previosuly!
     - We store adj list for left side!
+    - It solves cases where matching found hopcroft carp is the one where there exists correct cost x,
+    - Hard --> We'd have to find all perfect matchings and check them one by one to find correct cost x.
 */
 
 void solveTest() {
@@ -194,6 +196,12 @@ void solveTest() {
     int max = INT_MAX;
 
     for(int u = 1; u <= G -> M; u++) {
+        // If there's no out that means it cannot be part of any cycle!
+        if (edges[u].size() == 0) {
+            cout << -1 << endl;
+            return;
+        }
+
         if (G -> pairU[u] != NIL) {
             for (auto e: edges[u]) {
                 if (e -> to == G -> pairU[u]) {
@@ -225,55 +233,6 @@ int main(int argc, char const *argv[]) {
     
     while (tests-- > 0) {
         solveTest();   
-    }
-
-    return 0;
-}
-
-int project1() {
-    string division;
-    cin >> division;
-
-    int V, K;
-    set<int> setK; // set holding officials.
-    cin >> V >> K;
-
-    while(K-- > 0) {
-        int u;
-        cin >> u;
-        setK.insert(u + 1);
-    }
-
-    int M;
-    cin >> M;
-
-    BiGraph* G = specialBiGraph(V);
-
-    for (int dummy = 0; dummy < M; dummy++) {
-        int i, j;
-        cin >> i >> j;
-
-        i += 1;
-        j += 1;
-
-        if (setK.find(i) != setK.end() && setK.find(j) == setK.end()) { // i is official
-            addEdge(G, i, j);
-        } else if (setK.find(i) == setK.end() && setK.find(j) != setK.end()){ // j is official 
-            addEdge(G, j, i);
-        } // else --> there's also a case when this graph isn't bipartite <=> i and j are both officials.
-          //          this algorithm can't handle that :C
-        else {
-            cout << "It should not go here!";
-        }
-        
-    }
-
-    cout << hopccroftKarp(G);
-
-    for(int u = 1; u <= G -> M; u++) {
-        if (G -> pairU[u] != NIL) {
-            cout << endl << u - 1 << " " << G -> pairU[u] - 1;
-        }
     }
 
     return 0;
