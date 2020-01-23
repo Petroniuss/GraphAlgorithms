@@ -189,33 +189,21 @@ void solveTest() {
 
     int maxiumMatching = hopccroftKarp(G);
 
-    cout << endl << "Maximum Matching = " << maxiumMatching << endl << "Edges: ";
-    for(int u = 1; u <= G -> M; u++) {
-        if (G -> pairU[u] != NIL) {
-            cout << endl << u << "<->" << G -> pairU[u];
-        }
-    }
-
     int x = INF;
     int min = INT_MIN;
     int max = INT_MAX;
 
     for(int u = 1; u <= G -> M; u++) {
         if (G -> pairU[u] != NIL) {
-            cout << endl << u << "<->" << G -> pairU[u];
-
             for (auto e: edges[u]) {
                 if (e -> to == G -> pairU[u]) {
                     min = checkMin(min, e -> l);
                     max = checkMax(max, e -> u);
-                    cout << " :" << e -> l << ", " << e -> u;
                     break;
                 }
             }
         }
     }
-
-    cout << endl << "Min: " << min << ", max: " << max << endl;
 
     if (min > max) {
         cout << -1 << endl;
@@ -226,11 +214,9 @@ void solveTest() {
 
     for(int u = 1; u <= G -> M; u++) {
         if (G -> pairU[u] != NIL) {
-            cout << endl << u << "<->" << G -> pairU[u];
+            cout << u << " " << G -> pairU[u] << endl;
         }
     }
-
-    cout << endl;
 }
 
 int main(int argc, char const *argv[]) {
