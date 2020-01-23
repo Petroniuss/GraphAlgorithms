@@ -18,8 +18,22 @@ struct BiGraph {
     int* dist;
 } typedef BiGraph;
 
+struct tuple {
+    int min;
+    int max;
+} typedef tuple;
+
 void addEdge(BiGraph* G, int u, int v) {
     G -> adj[u].push_back(v);
+}
+
+BiGraph* specialBiGraph(int V) {
+    BiGraph* G = new BiGraph;
+    G -> N = V;
+    G -> M = V;
+    G -> adj = new vector<int>[V + 1];
+
+    return G;
 }
 
 BiGraph* createBiGraph(int M, int N) {
@@ -30,6 +44,16 @@ BiGraph* createBiGraph(int M, int N) {
     G -> adj = new vector<int>[M + 1];
 
     return G;
+}
+
+void printBiGraph(BiGraph* G) {
+    cout << endl << "----- BiGraph ----- " << endl << "V = " << G -> M << endl; 
+    for (int i = 1; i <= G -> M; i++ ) {
+        for (auto v : G -> adj[i]) {
+            cout << i << " <-> " << v << endl;
+        }
+    }
+    cout << "-------------------";
 }
 
 bool dfs(BiGraph* G, int u) {
@@ -89,7 +113,6 @@ int hopccroftKarp(BiGraph* G) {
     G -> pairV = new int[G -> N + 1];
     G -> dist = new int [G -> M + 1];
 
-    // MIGHT BE A BUG!
     for (int u = 0; u <= G -> M; u++) {
         G -> pairU[u] = NIL;
     }
@@ -111,20 +134,47 @@ int hopccroftKarp(BiGraph* G) {
     return maxiumMatching;
 }
 
-BiGraph* specialBiGraph(int V) {
-    BiGraph* G = new BiGraph;
-    G -> N = V;
-    G -> M = V;
-    G -> adj = new vector<int>[V + 1];
+// ---- Notes ---- 
+/*
+    - Vertices now are numerated from 1 not 0 as it was previosuly!
+    - We store adj list for left side!
+*/
 
-    return G;
+void solveTest() {
+    int n; // number of vertices.
+    cin >> n;    
+
+    int m; // number of edges;
+    cin >> m;
+    int dummy = m;
+
+    int* L = new int[n + 1];
+    int* U = new int[n + 1];
+    BiGraph* G = specialBiGraph(n);
+
+    while (dummy-- > 0) {
+        int from, to, l, u;
+        cin >> from >> to >> l >> u;
+    
+        addEdge(G, from, to);
+    }
+
+    printBiGraph(G);
 }
 
+
 int main(int argc, char const *argv[]) {
+    int tests;
+    cin >> tests;
     
-    
-    
-    
+    while (tests-- > 0) {
+        solveTest();   
+    }
+
+    return 0;
+}
+
+int project1() {
     string division;
     cin >> division;
 
@@ -157,6 +207,7 @@ int main(int argc, char const *argv[]) {
         } // else --> there's also a case when this graph isn't bipartite <=> i and j are both officials.
           //          this algorithm can't handle that :C
         else {
+            cout << "It should not go here!";
         }
         
     }
