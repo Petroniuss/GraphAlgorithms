@@ -212,8 +212,8 @@ void solveTest() {
             }
         }
     }
-
-    if (min > max) {
+    
+    if (min > max || maxiumMatching != n) {
         cout << -1 << endl;
         return;
     }
