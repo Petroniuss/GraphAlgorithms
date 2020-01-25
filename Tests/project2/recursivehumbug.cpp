@@ -135,13 +135,7 @@ bool bfs(BiGraph* G) {
 }
 
 int hopccroftKarp(BiGraph* G) {
-    for (int u = 0; u <= G -> M; u++) {
-        G -> pairU[u] = NIL;
-    }
-
-    for (int v = 0; v <= G -> N; v++) {
-        G -> pairV[v] = NIL;
-    }
+    clean(G);
 
     int maxiumMatching = 0;
 
@@ -255,40 +249,7 @@ bool recursive(BiGraph* G, vector<Edge*>* edges, int* min, int* max, int u) {
 }
 
 // O(n * 2^N) -- too slow :/
-void recursiveTest() {
-    int n; // number of vertices.
-    cin >> n;    
-
-    int m; // number of edges;
-    cin >> m;
-    int dummy = m;
-
-    int* L = new int[n + 1];
-    int* U = new int[n + 1];
-    
-    BiGraph* G = specialBiGraph(n);
-    vector<Edge*>* edges = new vector<Edge*>[n + 1];
-
-    while (dummy-- > 0) {
-        int from, to, l, u;
-        Edge* e;
-
-        cin >> from >> to >> l >> u;
-        e = edge(to, l, u);
-
-        addEdge(G, from, to);
-        edges[from].push_back(e);
-    }   
-
-    // Quick check if it's worth to seach for perfect matching.
-    for(int u = 1; u <= G -> M; u++) {
-        // If there's no out that means it cannot be part of any cycle!
-        if (edges[u].size() == 0) {
-            cout << -1 << endl;
-            return;
-        }
-    }
-
+void solveRecursive(BiGraph* G,  vector<Edge*>* edges) {
     clean(G);
     
     int min = INT_MIN;
@@ -309,17 +270,51 @@ void recursiveTest() {
     }
 }
 
-// -------------------------------------------------------------
-Edge* findEdge(vector<Edge*>* edges, int from, int to) {
-    for (auto edge: edges[from]) {
-        if (edge -> to == to ) 
-            return edge;
-    }
-
-    cout << "Error!" << endl;
+int random(int from, int to){
+    return rand() % (to - from + 1) + from;
 }
 
+int randomMatching(BiGraph* G) {   
+    clean(G);
+
+    int maximumMatching = 0;
+    int ksi = random(1, G -> N);
+
+    while (ksi-- > 0) {
+        int u = random(1, G -> N);
+        int len = G -> adj[u].size();
+
+        if (len > 0) {
+            int rand = random(0, len - 1);
+            int v = G -> adj[u][rand];
+
+            if (G -> dist[u] == NIL && G -> pairV[v] == NIL && G -> pairU[u] == NIL) {
+                G -> dist[u] = INF;
+                G -> pairU[u] = v;
+                G -> pairV[v] = u;
+
+                maximumMatching += 1;
+            }
+        }
+    }
+
+    while(bfs(G)) {
+        for (int u = 1; u <= G -> M; u++) {
+            if (G -> pairU[u] == NIL && dfs(G, u)) {
+                maximumMatching += 1;
+            }
+        }
+    }
+
+    return maximumMatching;
+}
+
+
+// Our last hope
+// firstly we attack with hopcraft then randomized matchings and lastly we try all possible matchings athough when we reach that point it's over for us :/
 void solveTest() {
+    static int phi = 250;
+
     int n; // number of vertices.
     cin >> n;    
 
@@ -327,9 +322,6 @@ void solveTest() {
     cin >> m;
     int dummy = m;
 
-    int* L = new int[n + 1];
-    int* U = new int[n + 1];
-    
     BiGraph* G = specialBiGraph(n);
     vector<Edge*>* edges = new vector<Edge*>[n + 1];
 
@@ -344,50 +336,102 @@ void solveTest() {
         edges[from].push_back(e);
     }
 
-    int maxiumMatching = hopccroftKarp(G);
+    // int maxiumMatching = hopccroftKarp(G);
 
-    int x = INF;
-    int min = INT_MIN;
-    int max = INT_MAX;
+    // int x = INF;
+    // int min = INT_MIN;
+    // int max = INT_MAX;
 
-    for(int u = 1; u <= G -> M; u++) {
-        // If there's no out that means it cannot be part of any cycle!
-        if (edges[u].size() == 0) {
-            cout << -1 << endl;
-            return;
-        }
+    // for(int u = 1; u <= G -> M; u++) {
+    //     // If there's no out that means it cannot be part of any cycle!
+    //     if (edges[u].size() == 0) {
+    //         cout << -1 << endl;
+    //         return;
+    //     }
 
-        if (G -> pairU[u] != NIL) {
-            for (auto e: edges[u]) {
-                if (e -> to == G -> pairU[u]) {
-                    min = checkMin(min, e -> l);
-                    max = checkMax(max, e -> u);
-                    break;
+    //     if (G -> pairU[u] != NIL) {
+    //         for (auto e: edges[u]) {
+    //             if (e -> to == G -> pairU[u]) {
+    //                 min = checkMin(min, e -> l);
+    //                 max = checkMax(max, e -> u);
+    //                 break;
+    //             }
+    //         }
+    //     }
+    // }
+
+    // // if (maxiumMatching != n) {
+    // //     cout << -1 << endl;
+    // //     return;
+    // // }
+
+    // // We've finally found correct matching! ;)
+    // if (!(min > max || maxiumMatching != n)) {            
+    //     cout << min << endl;
+    //     for(int u = 1; u <= G -> M; u++) {
+    //         if (G -> pairU[u] != NIL) {
+    //             cout << u << " " << G -> pairU[u] << endl;
+    //         }
+    //     }
+    //     return;
+    // }
+
+
+    // randomized matchins!
+    for (int dummy = 0; dummy < phi; dummy++) {
+        int maxiumMatching = randomMatching(G);
+
+        int x = INF;
+        int min = INT_MIN;
+        int max = INT_MAX;
+
+        for(int u = 1; u <= G -> M; u++) {
+            // If there's no out that means it cannot be part of any cycle!
+            if (edges[u].size() == 0) {
+                cout << -1 << endl;
+                return;
+            }
+
+            if (G -> pairU[u] != NIL) {
+                for (auto e: edges[u]) {
+                    if (e -> to == G -> pairU[u]) {
+                        min = checkMin(min, e -> l);
+                        max = checkMax(max, e -> u);
+                        break;
+                    }
                 }
             }
         }
-    }
-    
-    if (min > max || maxiumMatching != n) {
-        cout << -1 << endl;
-        return;
-    }
 
-    cout << min << endl;
+        // if (maxiumMatching != n) {
+        //     cout << - 1 << endl;
+        //     return;
+        // }
 
-    for(int u = 1; u <= G -> M; u++) {
-        if (G -> pairU[u] != NIL) {
-            cout << u << " " << G -> pairU[u] << endl;
+         // We've finally found correct matching! ;)
+        if (min <= max && maxiumMatching == n) {                     
+            cout << min << endl;
+            for(int u = 1; u <= G -> M; u++) {
+                if (G -> pairU[u] != NIL) {
+                    cout << u << " " << G -> pairU[u] << endl;
+                }
+            }
+            return;
         }
     }
+
+    // Our last hope :C
+    solveRecursive(G, edges);
 }
+
+// -------------------------------------------------------------
 
 int main(int argc, char const *argv[]) {
     int tests;
     cin >> tests;
     
     while (tests-- > 0) {
-        recursiveTest();   
+        solveTest();   
     }
 
     return 0;
