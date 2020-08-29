@@ -3,12 +3,16 @@ Implementations of various graph algorithms showed on lectures.
 
 ## Lecture
 - [edmonds-karp.py](./Lecture/edmonds_karp.y)
+...
 
 ## Laboratory
 1. [warm-up](./Laboratory/Lab_1)
 2. [ford-fulkerson..](./Laboratory/Lab_2)
 3. [edge-connectivity](./Laboratory/Lab_3)
-    
+...
+
+## Tests
+...
 
 ## Elementary Algorithms covered on ASD
 - [dijsktra.py](./Elementary/dijsktra.py)
